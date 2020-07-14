@@ -1,41 +1,35 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Problem
-# Given a set of candidate numbers (candidates) (without duplicates) and a target number (target), find all unique combinations in candidates where the candidate numbers sums to target. The same repeated number may be chosen from candidates unlimited number of times.
-# 
-# Note:
-# 
-# - All numbers (including target) will be positive integers.
-# - The solution set must not contain duplicate combinations.
-# 
-# Example 1:<br>
-# Input: candidates = [2,3,6,7], target = 7,<br>
-# A solution set is:<br>
-# [
-#   [7],
-#   [2,2,3]
-# ]
-# 
-# Example 2:<br>
-# Input: candidates = [2,3,5], target = 8,<br>
-# A solution set is:<br>
-# [
-#   [2,2,2,2],
-#   [2,3,3],
-#   [3,5]
-# ]
+"""
+Problem
+Given a set of candidate numbers (candidates) (without duplicates) and a target number (target), find all unique combinations in candidates where the candidate numbers sums to target. The same repeated number may be chosen from candidates unlimited number of times.
 
-# # Brainstorm
-# 
-# 
-# 
-# 
+Note:
+- All numbers (including target) will be positive integers.
+- The solution set must not contain duplicate combinations.
+
+Example 1:
+Input: candidates = [2,3,6,7], target = 7,
+A solution set is:
+[
+[7],
+[2,2,3]
+]
+
+Example 2:
+Input: candidates = [2,3,5], target = 8,
+A solution set is:
+[
+[2,2,2,2],
+[2,3,3],
+[3,5]
+]
+"""
 
 # # Solution 1
 # ##### dfs
 
-# In[ ]:
 
 
 class Solution:
@@ -60,7 +54,6 @@ class Solution:
         return all_subsets
 
 
-# In[4]:
 
 
 def combination_sum(candidates, target):
@@ -81,7 +74,6 @@ def dfs(candidates, target, start, templist, subsets):
 
 # My wrong solution, which counted duplicate combinations:
 
-# In[ ]:
 
 
 class Solution:
@@ -107,7 +99,6 @@ class Solution:
 
 # # Solution 2: backtracking
 
-# In[9]:
 
 
 def combination_sum_backtrack(candidates, target):
@@ -126,17 +117,9 @@ def backtrack(candidates, target, start, templist, subsets):
             templist.pop()
 
 
-# In[10]:
-
-
-candidates = [2, 3, 5]
-target = 8
-combination_sum_backtrack(candidates, target)
 
 
 # # Solution 3: bottom up dynamic programming
-
-# In[33]:
 
 
 def combinationSum(candidates, target):
@@ -151,18 +134,3 @@ def combinationSum(candidates, target):
         for i in range(val, 1+target):
             dp[i].extend(comb+[val] for comb in dp[i-val])
     return dp[target]
-
-
-# In[52]:
-
-
-a = [[2, 2]]
-a.extend([2] + comb for comb in [[]])
-print(a)
-
-
-# In[51]:
-
-
-[[2] + comb for comb in [[]]]
-
