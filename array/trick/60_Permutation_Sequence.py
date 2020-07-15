@@ -26,10 +26,6 @@
 # Input: n = 4, k = 9<br>
 # Output: "2314"
 
-# Solution 1: backtrack
-
-# In[3]:
-
 
 def get_permutation(n, k):
     nums = [str(i) for i in range(1, n+1)]
@@ -47,10 +43,4 @@ def get_permutation(n, k):
     return ''.join(permutations)
 
 
-# In[4]:
-
-
-n = 3
-k = 3
-get_permutation(3, 3)
 

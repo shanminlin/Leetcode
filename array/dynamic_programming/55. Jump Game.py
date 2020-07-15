@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Problem
-# 
+# Problem
+# leetcode has a good article explaining different solutions
+
 # Given an array of non-negative integers, you are initially positioned at the first index of the array.
 # 
 # Each element in the array represents your maximum jump length at that position.

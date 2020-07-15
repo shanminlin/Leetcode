@@ -1,23 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Problem
-# 
-# Given a string s, partition s such that every substring of the partition is a palindrome.<br>
-# 
-# Return all possible palindrome partitioning of s.<br>
-# 
-# Example:<br>
-# Input: "aab"<br>
-# Output:<br>
-# [
-#   ["aa","b"],
-#   ["a","a","b"]
-# ]
+"""
+Given a string s, partition s such that every substring of the partition is a palindrome.
 
-# Solution 1: Backtrack
+Return all possible palindrome partitioning of s.
 
-# In[1]:
+Example:
+
+Input: "aab"
+
+Output: [["aa","b"], ["a","a","b"]]
+"""
 
 
 def partition(s):
@@ -35,10 +29,4 @@ def backtrack(s, start, templist, partitions):
             backtrack(s, i+1, templist, partitions)
             templist.pop()
 
-
-# In[2]:
-
-
-s = 'aab'
-partition(s)
 
