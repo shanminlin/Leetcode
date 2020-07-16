@@ -1,29 +1,26 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Problem
-# 
-# Given a string, find the length of the longest substring without repeating characters.
-# 
-# Example 1:
-# 
-# Input: "abcabcbb"<br>
-# Output: 3 <br>
-# Explanation: The answer is "abc", with the length of 3. <br>
-# 
-# Example 2:
-# 
-# Input: "bbbbb"<br>
-# Output: 1<br>
-# Explanation: The answer is "b", with the length of 1.<br>
-# 
-# Example 3:
-# 
-# Input: "pwwkew"<br>
-# Output: 3<br>
-# Explanation: The answer is "wke", with the length of 3. 
-#              Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
+"""
+Given a string, find the length of the longest substring without repeating characters.
 
+Example 1:
+
+Input: "abcabcbb"
+Output: 3 
+Explanation: The answer is "abc", with the length of 3. 
+Example 2:
+
+Input: "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+Example 3:
+
+Input: "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3. 
+             Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
+             
 # # Brainstorm
 # 
 # Be careful of edge cases like '' and ' '.
@@ -42,11 +39,12 @@
 # - Same time and space complexity as above
 # 
 # Can we use only one dictionary? If so, we cannot use the length of the dictionary to calculate each nonduplicated substring. In the previous dictionary solution, we already know the start of the substring. We can use that to calculate the nonduplicated substring.
+- sliding window
+
+"""
 
 # # Solution 1
 # ##### set
-
-# In[2]:
 
 
 class Solution:
@@ -71,9 +69,6 @@ class Solution:
 # # Solution 2
 # ##### dictionary
 
-# In[ ]:
-
-
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         
@@ -94,28 +89,38 @@ class Solution:
 
 
 # # Solution 3
-# ##### Use only 1 dictionary
+# ##### sliding window: Use only 1 dictionary
 
-# In[ ]:
-
+from collections import Counter
 
 class Solution:
-    def lengthOfLongestSubstring(self, s: str) -> int:
+    def lengthOfLongestSubstring(self, s):
         
-        start = 0
+        # Initialize counter to store characters in sliding window
+        window = Counter()
+        
+        # Initialize variable to store result
         max_length = 0
-        seen_at = {}
         
-        for i in range(len(s)):
-            if s[i] not in seen_at or (s[i] in seen_at and seen_at[s[i]] < start):
-                length = i - start + 1
-                max_length = max(max_length, length)
-                seen_at[s[i]] = i
-            else:
-                start = seen_at[s[i]] + 1
-                # length = i - start
-                # max_length = max(max_length, length)
-                seen_at[s[i]] = i
+        # Initialize pointers for sliding window
+        left = 0
+        right = 0
         
+        while right < len(s):
+            # Update counter seen
+            char = s[right]
+            window[char] += 1
+            
+            if window[char] == 1:
+                # Update result
+                max_length = max(max_length, right - left + 1)
+                
+            else: # seen[char] > 1, a duplicate appears
+                while window[char] > 1:
+                    # slide left pointer until the same character removed from sliding window
+                    window[s[left]] -= 1
+                    left += 1
+            
+            right += 1
         return max_length
 
