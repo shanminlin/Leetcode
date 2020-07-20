@@ -125,8 +125,8 @@ def combinationSum(candidates, target):
     if not candidates or not target:
         return []
 
-    aux = [[] for _ in range(target + 1)]
-    aux[0].append([]) # this is because [[2] + comb for comb in []] will be []. 
+    dp = [[] for _ in range(target + 1)]
+    dp[0].append([]) # this is because [[2] + comb for comb in []] will be []. 
 
     for val in candidates:
         for i in range(val, 1+target):
