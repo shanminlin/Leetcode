@@ -10,8 +10,6 @@
 # - BFS to visit the nodes, and at every node you are swapping its left and right subtrees. 
 # - from top to bottom
 
-# In[ ]:
-
 
 from collections import deque
 class Solution:
@@ -35,9 +33,6 @@ class Solution:
 # # Solution 2
 # ##### DFS
 
-# In[ ]:
-
-
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, x):
@@ -47,19 +42,23 @@ class Solution:
 
 class Solution:
     def invertTree(self, root: TreeNode) -> TreeNode:
-        if root is None:
-            return None
         
-        root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
-        
+        self.helper(root)
         return root
+
+        
+    def helper(self, node):
+        if node is None:
+            return
+        
+        node.left, node.right = node.right, node.left
+        
+        self.helper(node.left)
+        self.helper(node.right)
 
 
 # # Solution 3
 # ##### DFS, implement stack
-
-# In[ ]:
-
 
 def invertTree(self, root: TreeNode) -> TreeNode:
     if root is None:

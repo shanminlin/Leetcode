@@ -18,9 +18,7 @@
 # Output: 2
 
 # # Solution 1
-# ##### Hash table
-
-# In[ ]:
+# ##### Hash table 
 
 
 from collections import Counter
@@ -38,8 +36,6 @@ class Solution:
 # # Solution 2
 # ##### Sort 
 
-# In[ ]:
-
 
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
@@ -52,8 +48,6 @@ class Solution:
 # # Solution 3
 # ##### Boyer-Moore Voting Algorithm
 # This is to find the majority element. To check whether the majority element is occurring more than n/2 times, we still need a hashtable to count.
-
-# In[ ]:
 
 
 class Solution:
@@ -71,4 +65,3 @@ class Solution:
                 count -= 1
 
         return candidate
-

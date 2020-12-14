@@ -18,17 +18,72 @@ A solution set is:
   [-1, -1, 2]
 ]
 """
+# Solution 1
+# O(N^3) time
+class Solution1:
+    def threeSum(self, nums):
+        nums.sort()
+        result = []
+        temp_list = []
+        self.helper(nums, temp_list, result)
+        return result
+    
+    def helper(self, nums, temp_list, result):
+        if len(temp_list) == 3 and sum(temp_list) == 0:
+            result.append(temp_list)
+            return
+        
+        elif len(temp_list) > 3 or sum(temp_list) > 0:
+            return
+        
+        else:
+            for i in range(len(nums)):
+                if nums[i] == nums[i-1] and i != 0:
+                    continue
+                else:
+                    self.helper(nums[i+1:], temp_list+[nums[i]], result)
 
-# # Brainstorm
-# 
+
+# Solution 2
+# O(N^2) time
+
+class Solution2:
+    def threeSum(self, nums):
+        
+        nums.sort()
+        result = []
+        for i, num in enumerate(nums):
+            if i != 0 and nums[i] == nums[i-1]:
+                continue
+            
+            complement = -num
+            l = i + 1
+            r = len(nums) - 1
+            while l < r: # when l == r, stop
+                if l - 1 != i and nums[l] == nums[l-1]:
+                    l += 1
+                    continue
+                   
+                if r + 1 <= len(nums) - 1 and nums[r] == nums[r+1]:
+                    r -= 1
+                    continue
+ 
+                if nums[l] + nums[r] == complement:
+                    result.append([num, nums[l], nums[r]])
+                    l += 1
+                    r -= 1
+                elif nums[l] + nums[r] < complement:
+                    l += 1
+                else:
+                    r -= 1
+        return result
+
+
+
 
 # My wrong solution. It does not handle the case when there are two groups of two_sums. and does not handle duplicate three sums.
-
-# In[ ]:
-
-
 class Solution:
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
+    def threeSum(self, nums):
         if len(nums) < 3:
             return []
         

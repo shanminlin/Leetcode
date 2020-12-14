@@ -21,6 +21,21 @@
 # Input: [4,5,6,7,0,1,2]<br>
 # Output: 0
 
-# # Brainstorm
-# 
-# 
+# Solution 1
+# O(N) time
+
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        
+        min_value = nums[0]
+        max_value = nums[0]
+        for i in range(1, len(nums)):
+            if nums[i] < min_value:
+                min_value = nums[i]
+                return min_value
+
+        return min_value
+
+# Solution 2
+# O(logN)binary search
+

@@ -24,22 +24,30 @@ Explanation: In this case, no transaction is done, i.e. max profit = 0.
 # Solution: time O(N), space O(1)
 
 class Solution:
-    def maxProfit(self, prices):
-        if not prices or len(prices) == 1:
+    def maxProfit(self, prices: List[int]) -> int:
+        if prices == [] or prices is None:
             return 0
         
-        result = float('-inf')
-        curr_min = prices[0]
-        curr_max = prices[0]
+        diff = 0
+        min_price = prices[0]
+        max_price = prices[0]
         for i in range(1, len(prices)):
-            if prices[i] <= curr_min:
-                curr_min = prices[i]
-                curr_max = prices[i]
+            
+            # if current price is lower than current min,
+            # start a new trend
+            if prices[i] < min_price:
+                min_price = prices[i]
+                max_price = prices[i]
+                
+            # if current price is higher than current max,
+            # continue the present trend
+            elif prices[i] > max_price:
+                max_price = prices[i]
+                diff = max(diff, max_price - min_price)
+                
+            # if current price is in between min and max price,
+            # no use
             else:
-                curr_max = prices[i]
-                result = max(result, curr_max - curr_min)
+                continue
         
-        if result == float('-inf'):
-            return 0
-        else:
-            return result
+        return diff

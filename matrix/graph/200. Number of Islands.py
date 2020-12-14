@@ -81,12 +81,8 @@ class Solution:
 
 
 # # Solution 2
-# #### DFS with visited set
+# #### DFS with grid modification
 
-# In[ ]:
-
-
-# DFS
 def numIslands(grid):
     if grid is None or len(grid) == 0:
         return 0
@@ -120,10 +116,7 @@ def dfs(grid, row, col):
 
 
 # # Solution 3
-# ##### DFS with grid modification
-
-# In[ ]:
-
+# ##### DFS with visited set
 
 class Solution:
     

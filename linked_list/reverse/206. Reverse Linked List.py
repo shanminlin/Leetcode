@@ -21,81 +21,25 @@
 # # Solution 1
 # ##### Iteration
 
-# In[29]:
-
-
 # Definition for singly-linked list.
 # class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
-        
-        if not head or not head.next:
-            return head
-        
-        prev = head
-        curr = prev.next
-        next_node = curr.next
-        head.next = None
-        
+        pre = None
+        curr = head
         while curr:
-            
-            curr.next = prev
+            # reverse link
+            next_node = curr.next
+            curr.next = pre
             
             # next iteration
-            prev = curr
+            pre = curr
             curr = next_node
-            if curr: # Be careful of the end here
-                next_node = curr.next
-        
-        return prev
 
-
-# In[19]:
-
-
-class Solution:
-    def reverseList(self, head: ListNode) -> ListNode:
-        
-        if head is None or head.next is None:
-            return head
-        
-        prev = None
-        
-        while head:
-            
-            next_node = head.next
-            # reverse link
-            head.next = prev
-            prev = head
-            head = next_node
-            
-        return prev
-
-
-# In[32]:
-
-
-s = Solution()
-
-
-# In[33]:
-
-
-new_head = s.reverseList1(head)
-
-
-# In[28]:
-
-
-head.next
-
-
-# In[ ]:
-
+        return pre
 
 
 
@@ -103,7 +47,6 @@ head.next
 # # Solution 2
 # ##### Recursion
 
-# In[ ]:
 
 
 class Solution:

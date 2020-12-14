@@ -24,21 +24,62 @@
 # - 1 <= m, n <= 100
 # - It's guaranteed that the answer will be less than or equal to 2 * 10 ^ 9.
 
-# In[ ]:
-
-
-def unique_paths(m, n):
-    aux = [[1 for _ in range(n)] for _ in range(m)]
+# Solution 1: recursion, global variable
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        self.result = 0
+        i = j = 0
+        target_i = m - 1
+        target_j = n - 1
+        self.helper(i, j, target_i, target_j)
+        return self.result
     
-    for i in range(1, m):
-        for j in range(1, n):
-            aux[i][j] = aux[i][j-1] + aux[i-1][j]
-    return aux[-1][-1]
+    def helper(self, i, j, target_i, target_j):
+        if i == target_i and j == target_j:
+            self.result += 1
+            return
+        if i > target_i or j > target_j:
+            return
+            
+        self.helper(i+1, j, target_i, target_j)
+        self.helper(i, j+1, target_i, target_j)
 
+# Solution 2: recursion
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        i = j = 0
+        target_i = m - 1
+        target_j = n - 1
+        return self.helper(i, j, target_i, target_j)
+
+    
+    def helper(self, i, j, target_i, target_j):
+        if i == target_i and j == target_j:
+            return 1
+        if i > target_i or j > target_j:
+            return 0
+            
+        return self.helper(i+1, j, target_i, target_j) + self.helper(i, j+1, target_i, target_j)
+
+
+# Solution 3: dynamic programming
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        
+        dp = [[0] * n] * m
+        for i in range(m):
+            dp[i][0] = 1
+            
+        for j in range(n):
+            dp[0][j] = 1
+            
+        for i in range(1, m):
+            for j in range(1, n):
+                dp[i][j] = dp[i][j-1] + dp[i-1][j]
+        
+        return dp[-1][-1]
 
 # The above solution runs in O(m * n) time and costs O(m * n) space. However, you may have noticed that each time when we update dp[i][j], we only need dp[i - 1][j] (at the previous row) and dp[i][j - 1] (at the current row). So we can reduce the memory usage to just two rows (O(n)).
-
-# In[ ]:
 
 
 
