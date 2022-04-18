@@ -1,3 +1,3 @@
 # Leetcode
 
-300+ problems categorized into different topics, covering all important concepts.
+200+ problems categorized into different topics, covering all important concepts.
